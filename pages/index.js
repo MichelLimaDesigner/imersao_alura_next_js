@@ -1,11 +1,15 @@
-import styled from 'styled-components'
-import db from '../db.json';
-import Widget from '../src/components/Widget'
-import QuizLogo from '../src/components/QuizLogo'
-import QuizBackground from '../src/components/QuizBackground'
-import Footer from '../src/components/Footer'
-import GitHubCorner from '../src/components/GitHubCorner'
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
+import { useState } from 'react';
+import db from '../db.json';
+import Widget from '../src/components/Widget';
+import QuizLogo from '../src/components/QuizLogo';
+import QuizBackground from '../src/components/QuizBackground';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -19,16 +23,39 @@ export const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+
+  function formSub(event) {
+    event.preventDefault();
+    router.push(`/quiz?name=${name}`);
+  }
+
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <QuizLogo />
         <Widget>
           <Widget.Header>
-            <h1>{db.title}</h1>
+            <h1>
+              { db.title }
+            </h1>
           </Widget.Header>
           <Widget.Content>
-            <p>{db.description}</p>
+            <p>
+              {' '}
+              { db.description }
+              {' '}
+            </p>
+
+            {/* eslint-disable-next-line no-undef */}
+            <form onSubmit={(event) => formSub(event)}>
+              <input type="text" placeholder="Digite seu nome" onChange={(event) => setName(event.target.value)} />
+              <button type="submit" disabled={!name}>
+                Jogar
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
 
