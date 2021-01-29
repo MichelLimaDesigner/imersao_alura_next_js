@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }) {
     // eslint-disable-next-line react/jsx-filename-extension
     <>
       <Head>
+        <title> Alura Quiz </title>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,400;1,700&display=swap" rel="stylesheet" />
       </Head>
